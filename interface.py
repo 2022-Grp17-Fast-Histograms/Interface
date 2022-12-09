@@ -9,7 +9,10 @@ import threading
 import csv
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib
 
+# non-interactive backend that is used on Linux in case Matplotlib can't connect to an X display
+matplotlib.use("Agg")
 # Global Variables
 width, height = 1920, 1080
 frame_size = width * height * 3 // 2
@@ -57,7 +60,7 @@ def updateFrame(f, window):
     yuv = np.frombuffer(f.read(frame_size), dtype=np.uint8).reshape((height * 3 // 2, width))
     bgr = cv.cvtColor(yuv, cv.COLOR_YUV2BGR_I420)
     data = cv.imencode('.png',bgr)[1].tobytes()
-    window['video'].update(data=data, visible=True, subsample=2)
+    window['video'].update(data=data, visible=True, subsample=3)
 
 # Function to read the histogram data file
 def readHistogramFile(string_name):
@@ -96,7 +99,7 @@ def updateHistogram(f, window):
     for i in range(0, 16):
         y.append(str(i + 1))
 
-    fig, ax = plt.subplots(figsize = (16,9))  
+    fig, ax = plt.subplots(figsize = (15,9))  
     fig.suptitle('Frame ' + str(current_frame), fontsize = 22)  
     x = [str(z) for z in y]
     barWidth =.25
