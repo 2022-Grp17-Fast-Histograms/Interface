@@ -199,7 +199,7 @@ while True:
             # Calculates the number of frames
             n_frames = file_size // (frame_size)
 
-            # Opens the YUv file 
+            # Opens the YUV file 
             f = open(file_path, 'rb')
             
             # the layout/design of the window
