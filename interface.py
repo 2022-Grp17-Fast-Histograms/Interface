@@ -1,4 +1,4 @@
-#YUV Video Interface
+#YUV Interface
 
 #Copyright © 2022 2022-Grp17-Fast-Histograms
 
